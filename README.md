@@ -1,5 +1,7 @@
 <h1 align="center"> 腾讯云·珠玑 SDK </h1>
 
+[![Build Status](https://travis-ci.com/bestony/zhuji.svg?branch=master)](https://travis-ci.com/bestony/zhuji)
+
 <p align="center"> 一个基于 PHP 元编程实现的腾讯云·珠玑智能推荐 SDK </p>
 
 ## 安装
