@@ -36,12 +36,8 @@ class Client
         $this->endpoint = $endpoint;
     }
 
-    public function getRecommendProducts(
-        string $poolid,
-        string $scenceId,
-        int $uidType,
-        string $uid
-        ) {
+    public function getRecommendProducts(array $recommedArray)
+    {
         $paramArray = [
           'Action' => 'DescribeRecommendProducts',
           'Region' => $this->region,
@@ -49,11 +45,8 @@ class Client
           'Nonce' => random_int(1000, 1000000),
           'Timestamp' => time(),
           'Version' => $this->version,
-          'PoolIds.0' => $poolid,
-          'SceneId' => $scenceId,
-          'UidType' => $uid,
-          'Uid' => $uid,
         ];
+        $paramArray = array_merge($paramArray, $recommedArray);
         $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
         $response = $this->client->request('POST', $this->endpoint, [
             'form_params' => $paramArray,
@@ -63,27 +56,17 @@ class Client
         return $body->getContents();
     }
 
-    public function createUserAction(
-        string $uid,
-        int $uidType,
-        string $scenceId,
-        int $actionType,
-        string $itemIds,
-        string $tractId)
+    public function createUserAction(array $userAction)
     {
         $paramArray = [
-        'Action' => 'CreateUserAction',
-        'Region' => $this->region,
-        'SecretId' => $this->secretId,
-        'Nonce' => random_int(1000, 1000000),
-        'Timestamp' => time(),
-        'Version' => $this->version,
-        'ItemIds.0' => $itemIds,
-        'SceneId' => $scenceId,
-        'UidType' => $uid,
-        'Uid' => $uid,
-        'ActionType' => $actionType,
-      ];
+            'Action' => 'CreateUserAction',
+            'Region' => $this->region,
+            'SecretId' => $this->secretId,
+            'Nonce' => random_int(1000, 1000000),
+            'Timestamp' => time(),
+            'Version' => $this->version,
+        ];
+        $paramArray = array_merge($paramArray, $userAction);
         $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
         $response = $this->client->request('POST', $this->endpoint, [
           'form_params' => $paramArray,
