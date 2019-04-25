@@ -21,6 +21,26 @@ class Client
     protected $version;
     protected $endpoint;
 
+    public function __call($name, $arguments)
+    {
+        $paramArray = [
+            'Action' => $name,
+            'Region' => $this->region,
+            'SecretId' => $this->secretId,
+            'Nonce' => random_int(1000, 1000000),
+            'Timestamp' => time(),
+            'Version' => $this->version,
+          ];
+        $paramArray = array_merge($paramArray, $arguments[0]);
+        $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
+        $response = $this->client->request('POST', $this->endpoint, [
+            'form_params' => $paramArray,
+          ]);
+        $body = $response->getBody();
+
+        return $body->getContents();
+    }
+
     public function __construct(
         string $secretId,
         string $secretKey,
@@ -34,46 +54,6 @@ class Client
         $this->region = $region;
         $this->version = $version;
         $this->endpoint = $endpoint;
-    }
-
-    public function getRecommendProducts(array $recommedArray)
-    {
-        $paramArray = [
-          'Action' => 'DescribeRecommendProducts',
-          'Region' => $this->region,
-          'SecretId' => $this->secretId,
-          'Nonce' => random_int(1000, 1000000),
-          'Timestamp' => time(),
-          'Version' => $this->version,
-        ];
-        $paramArray = array_merge($paramArray, $recommedArray);
-        $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
-        $response = $this->client->request('POST', $this->endpoint, [
-            'form_params' => $paramArray,
-          ]);
-        $body = $response->getBody();
-
-        return $body->getContents();
-    }
-
-    public function createUserAction(array $userAction)
-    {
-        $paramArray = [
-            'Action' => 'CreateUserAction',
-            'Region' => $this->region,
-            'SecretId' => $this->secretId,
-            'Nonce' => random_int(1000, 1000000),
-            'Timestamp' => time(),
-            'Version' => $this->version,
-        ];
-        $paramArray = array_merge($paramArray, $userAction);
-        $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
-        $response = $this->client->request('POST', $this->endpoint, [
-          'form_params' => $paramArray,
-        ]);
-        $body = $response->getBody();
-
-        return $body->getContents();
     }
 
     /**
