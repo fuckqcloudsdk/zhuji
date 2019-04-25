@@ -63,6 +63,36 @@ class Client
         return $body->getContents();
     }
 
+    public function createUserAction(
+        string $uid,
+        int $uidType,
+        string $scenceId,
+        int $actionType,
+        string $itemIds,
+        string $tractId)
+    {
+        $paramArray = [
+        'Action' => 'CreateUserAction',
+        'Region' => $this->region,
+        'SecretId' => $this->secretId,
+        'Nonce' => random_int(1000, 1000000),
+        'Timestamp' => time(),
+        'Version' => $this->version,
+        'ItemIds.0' => $itemIds,
+        'SceneId' => $scenceId,
+        'UidType' => $uid,
+        'Uid' => $uid,
+        'ActionType' => $actionType,
+      ];
+        $paramArray['Signature'] = $this->_sign($paramArray, $this->secretKey);
+        $response = $this->client->request('POST', $this->endpoint, [
+          'form_params' => $paramArray,
+        ]);
+        $body = $response->getBody();
+
+        return $body->getContents();
+    }
+
     /**
      * Generate Sign.
      *
