@@ -1,27 +1,22 @@
-<h1 align="center"> zhuji </h1>
+<h1 align="center"> 腾讯云·珠玑 SDK </h1>
 
-<p align="center"> 腾讯云珠玑·SDK.</p>
+<p align="center"> 一个基于 PHP 元编程实现的腾讯云·珠玑智能推荐 SDK </p>
 
-
-## Installing
+## 安装
 
 ```shell
 $ composer require bestony/zhuji -vvv
 ```
 
-## Usage
+## 用法
 
-TODO
+## 贡献项目
 
-## Contributing
+你可以以下三种形式来参与项目贡献
 
-You can contribute in one of three ways:
-
-1. File bug reports using the [issue tracker](https://github.com/bestony/zhuji/issues).
-2. Answer questions or fix bugs on the [issue tracker](https://github.com/bestony/zhuji/issues).
-3. Contribute new features or update the wiki.
-
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+1. 使用 [issue](https://github.com/bestony/zhuji/issues) 来记录本项目的 SDK
+2. 在 Issue [issue tracker](https://github.com/bestony/zhuji/issues) 中回答问题或修复 Bug。
+3. 维护新的功能或更新 Wiki。
 
 ## License
 
