@@ -15,5 +15,8 @@
         "psr-4": {
             "Bestony\\Zhuji\\": "src"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
     }
 }
