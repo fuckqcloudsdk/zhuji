@@ -1,0 +1,17 @@
+{
+    "name": "bestony\/zhuji",
+    "description": "腾讯云珠玑·SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bestony",
+            "email": "best.tony@foxmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Bestony\\Zhuji\\": "src"
+        }
+    }
+}
