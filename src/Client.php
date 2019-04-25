@@ -21,6 +21,14 @@ class Client
     protected $version;
     protected $endpoint;
 
+    /**
+     * 主要的调用函数.
+     *
+     * @param string $name      调用时的函数名
+     * @param array  $arguments 调用参数
+     *
+     * @return string output
+     */
     public function __call($name, $arguments)
     {
         $paramArray = [
